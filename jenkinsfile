@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh '/Applications/SoapUI-5.5.0.app/Contents/java/app/bin/testrunner.sh -r -j -f reports calculator_tests.xml'
+            }
+        }
+    }
+    post {
+        always {
+            junit 'reports/**/*.xml'
+        }
+    }
+}
